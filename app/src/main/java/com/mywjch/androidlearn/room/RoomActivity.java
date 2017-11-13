@@ -6,7 +6,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.TextView;
 
 import com.mywjch.androidlearn.R;
@@ -43,16 +42,12 @@ public class RoomActivity extends AppCompatActivity {
 
         db.userDao().insert(users);
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        fab.setOnClickListener(view -> {
+            List<User> dbusers = db.userDao().getAll();
+            int size = dbusers.size();
 
-                List<User> dbusers = db.userDao().getAll();
-                int size = dbusers.size();
-
-                Snackbar.make(view, "数据库有" + size + "条数据", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
+            Snackbar.make(view, "数据库有" + size + "条数据", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
         });
 
     }
